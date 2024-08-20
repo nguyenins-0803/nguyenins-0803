@@ -1,0 +1,41 @@
+﻿
+@model QLBANHANG.Models.Product
+
+@{
+    ViewBag.Title = "Xóa sản phẩm";
+    String id = Request["id"];
+}
+
+<h2>Xác nhận xóa sản phẩm</h2>
+
+<p>Bạn có chắc chắn muốn xóa sản phẩm này không?</p>
+
+<div>
+    <form action="/Sanpham/DeleteConfirmed" method="post">
+        <label for="ProductID">ProductID:</label>
+        <input type="text" name="ProductID" value="@Model.ProductID" readonly />
+
+        <h4>Sản phẩm</h4>
+        <dl class="dl-horizontal">
+
+            <dt>Tên sản phẩm:</dt>
+            <dd>@Model.ProductName</dd>
+            <dt>Mô tả:</dt>
+            <dd>@Model.Description</dd>
+            <dt>Giá:</dt>
+            <dd>@Model.Price</dd>
+            <dt>Số lượng:</dt>
+            <dd>@Model.StockQuantity</dd>
+            <dt>Danh mục:</dt>
+            <dd>@Model.CategoryID</dd>
+            <dt>Hình ảnh:</dt>
+            <dd>@Model.ImageUrl</dd>
+        </dl>
+
+
+        <input type="submit" value="Xóa" class="btn btn-danger" />
+        <a href="@Url.Action("Index")" class="btn btn-default">Hủy</a>
+
+    </form>
+</div>
+

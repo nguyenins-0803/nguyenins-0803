@@ -1,0 +1,29 @@
+﻿@model QLBANHANG.Models.Product
+@{ 
+    ViewBag.Title = "Edit";
+    String id = Request["id"];
+}
+<h2>Sửa đối tượng có ID là @abc </h2>
+<form action="/Sanpham/PostEdit" method="post">
+    <label for="ProductID">ProductID:</label>
+    <input type="text" name="ProductID" value="@Model.ProductID" readonly />
+
+    <label for="ProductName">ProductName:</label>
+    <input type="text" name="ProductName" value="@Model.ProductName" />
+    <label for="Description">Description:</label>
+    <input type="text" name="Description" value="@Model.Description" />
+    <label for="Price">Price:</label>
+    <input type="text" name="Price" value="@Model.Price" />
+    <label for="StockQuantity">StockQuantity:</label>
+    <input type="text" name="StockQuantity" value="@Model.StockQuantity" />
+    <p></p>
+    <label for="Image">Image:</label>
+    <input type="text" name="Image" value="@Model.ImageUrl" />
+    <label for="CategoryID">CategoryID:</label>
+    <input type="text" name="CategoryID" value="@Model.CategoryID" />
+    <input type="submit" name="Submit" value="Sửa" />
+    <a href="@Url.Action("Index")" class="btn btn-default">Hủy</a>
+
+</form>
+
+
