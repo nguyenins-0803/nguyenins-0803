@@ -3,7 +3,7 @@
     ViewBag.Title = "Edit";
     String id = Request["id"];
 }
-<h2>Sửa đối tượng có ID là @abc </h2>
+<h2>Sửa đối tượng có ID là @id   </h2>
 <form action="/Sanpham/PostEdit" method="post">
     <label for="ProductID">ProductID:</label>
     <input type="text" name="ProductID" value="@Model.ProductID" readonly />

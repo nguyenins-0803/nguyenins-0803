@@ -21,6 +21,8 @@ namespace QLBANHANG.Controllers
             var products = db.Products.ToList();
             return View(products);
         }
+        public ActionResult Demo()
+        {  return View(); }
         public ActionResult Add()
         {
             return View();
@@ -39,15 +41,20 @@ namespace QLBANHANG.Controllers
             // Chuyển đổi ID từ string sang int sử dụng Convert.ToInt32()            
             Decimal Gia = Convert.ToDecimal(Price);
             int Soluong = Convert.ToInt32(StockQuantity);
-            int GiohangID = Convert.ToInt32(CategoryID);
+            int PhanloaiID = Convert.ToInt32(CategoryID);
 
             Product newObj = new Product();
+
+            // Tìm ID lớn nhất hiện tại và tăng thêm 1 để tạo ID mới
+            int maxID = db.Products.Max(p => p.ProductID);
+            newObj.ProductID = maxID + 1;
+
             // Gán giá trị đã chuyển đổi
             newObj.ProductName = ProductName;
             newObj.Description = Description;
             newObj.Price = Gia;
             newObj.StockQuantity = Soluong;
-            newObj.CategoryID = GiohangID;
+            newObj.CategoryID = PhanloaiID;
             newObj.ImageUrl = ImageUrl;
             newObj.CreatedAt = DateTime.Now; // Tự động thiết lập thời gian tạo
 
@@ -126,13 +133,18 @@ namespace QLBANHANG.Controllers
 
             //Xoa xong thi se load lai bang va ko con ban ghi do nua 
             
-            String id = Request.QueryString["id"];
+            
+            string id = Request.QueryString["id"];
             int ProductID = Convert.ToInt32(id);
-            Product deleteObj = db.Products.Where(o => o.ProductID == ProductID  ).FirstOrDefault();
-            db.Products.DeleteOnSubmit(deleteObj);
-            db.SubmitChanges();
+            Product deleteObj = db.Products.Where(o => o.ProductID == ProductID).FirstOrDefault();
+            if (deleteObj != null)
+            {
+                db.Products.DeleteOnSubmit(deleteObj);
+                db.SubmitChanges();
+            }
             var x = db.Products.ToList();
-            return View("index",x);
+            return View("index", x);
+
         }
 
 

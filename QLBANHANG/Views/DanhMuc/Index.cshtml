@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách danh mục";
+
+}
+
+
+<div >
+    <table id="categoryList" class="table">
+        <thead>
+        <tr>
+        <th>ID</th>
+        <th>Tên danh mục</th>
+        <th>Mô tả </th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        </tbody>
+    </table>
+    
+    <script type="text/javascript">
+
+
+    $(document).ready(function() {//jquery da xay dung san , document la tai lieu , function ko chua tham so dau vao, chi thuc hien doan code ben trong
+        $.ajax({
+        url: '@Url.Action("GetListDanhMuc", "DanhMuc")',//chi den 1 dia chi, duongdan 
+        type: 'POST',//noi chuyen bang giaothuc post du lieu duoc dong goi lai chuyen di ko hien len url
+        dataType: 'json',
+        success: function (data) {
+           
+           // alert(data);// Kiểm tra dữ liệu trả về
+            var str = $('#categoryList tbody');
+            str.empty();
+            
+            $.each(data, function (index, category) {
+
+              var row ="<tr><td>" + category.CategoryID + '</td>'
+                                    '<td>' + category.CategoryName + '</td>'
+                                    '<td>' + category.Description + '</td>'
+                                    
+                                    '</tr >';
+                str.append(row);      
+            });
+        },
+        error: function() {
+            alert("Đã xảy ra lỗi khi load danh mục.");
+        }
+    });
+});
+
+    </script>
+</div>
+
